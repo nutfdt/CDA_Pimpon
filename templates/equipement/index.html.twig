@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello EquipementController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Equipement
+        <a class="btn btn-primary"
+           href="{{ path('add_equipement') }}"
+           role="button">Ajouter</a>
+    </h1>
+    <br>
+    <h2>Liste des equipement</h2>
+    <br>
+    <table class="table" >
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nom</th>
+            <th scope="col">Référence</th>
+            <th scope="col">Libellé</th>
+            <th scope="col">Contact</th>
+            <th scope="col">Opérations</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for equipement in equipements %}
+            <tr>
+                <th scope="row"> {{ equipement.id }} </th>
+                <td> {{ equipement.nom }} </td>
+                <td> {{ equipement.reference }} </td>
+                <td> {{ equipement.libelle }} </td>
+                <td> {{ equipement.contact }} </td>
+                <td>
+                    <a class="btn btn-primary"
+                       href="{{ path('edit_equipement', {id: equipement.id}) }}"
+                       role="button">Edit</a>
+                    <a class="btn btn-danger"
+                       href="{{ path('delete_equipement', {id: equipement.id}) }}"
+                       role="button">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
