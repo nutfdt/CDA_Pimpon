@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CompanieController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Companie</h1>
+    <br>
+    <h2>Ajout companie</h2>
+    <br>
+    {{ form_start(formC, { 'attr': { 'class': 'form-horizontal'}}) }}
+        <div class="mb-3">
+            {{ form_label(formC.nom, 'Nom : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formC.nom, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(formC.secteur, 'Secteur : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formC.secteur, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <a class="btn btn-danger"
+           href="{{ path('home_companie') }}"
+           role="button">Retour</a>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    {{ form_end(formC) }}
+
+</div>
+{% endblock %}

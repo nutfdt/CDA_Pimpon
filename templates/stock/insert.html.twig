@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CompanieController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Stock</h1>
+    <br>
+    <h2>Ajout stock</h2>
+    <br>
+    {{ form_start(formS, { 'attr': { 'class': 'form-horizontal'}}) }}
+        <div class="mb-3">
+            {{ form_label(formS.idCaserne, 'Caserne : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formS.idCaserne, {'attr': {'class': 'form-select'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(formS.idEquipement, 'Equipement : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formS.idEquipement, {'attr': {'class': 'form-select'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(formS.quantite, 'Quantité : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formS.quantite, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(formS.limiteStock, 'Limite Stock : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formS.limiteStock, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <a class="btn btn-danger"
+           href="{{ path('home_stock') }}"
+           role="button">Retour</a>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    {{ form_end(formS) }}
+
+</div>
+{% endblock %}

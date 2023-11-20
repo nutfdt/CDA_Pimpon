@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello StockController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Stock
+        <a class="btn btn-primary"
+           href="{{ path('add_stock') }}"
+           role="button">Ajouter</a>
+    </h1>
+    <br>
+    <h2>Liste des stocks</h2>
+    <br>
+    <table class="table" >
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Caserne</th>
+            <th scope="col">Equipement</th>
+            <th scope="col">Quantité</th>
+            <th scope="col">Limite</th>
+            <th scope="col">Opérations</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for stock in stocks %}
+            <tr>
+                <th scope="row"> {{ stock.id }} </th>
+                <td> {{ stock.idCaserne.adresse }} </td>
+                <td> {{ stock.idEquipement.nom }} </td>
+                <td> {{ stock.quantite }} </td>
+                <td> {{ stock.limiteStock }} </td>
+                <td>
+                    <a class="btn btn-primary"
+                       href="{{ path('edit_stock', {id: stock.id}) }}"
+                       role="button">Edit</a>
+                    <a class="btn btn-danger"
+                       href="{{ path('delete_stock', {id: stock.id}) }}"
+                       role="button">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
