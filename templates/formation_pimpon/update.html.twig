@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormationPimponController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Formation pompier</h1>
+    <br>
+    <h2>Modification formation pompier</h2>
+    <br>
+    {{ form_start(editformpimpon, { 'attr': { 'class': 'form-horizontal'}}) }}
+        <div class="mb-3">
+            {{ form_label(editformpimpon.idPompier, 'Pompier : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(editformpimpon.idPompier, {'attr': {'class': 'form-select'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(editformpimpon.idFormation, 'Formation : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(editformpimpon.idFormation, {'attr': {'class': 'form-select'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(editformpimpon.date, 'Date : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(editformpimpon.date, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(editformpimpon.duree, 'Durée : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(editformpimpon.duree, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(editformpimpon.adresse, 'Adresse : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(editformpimpon.adresse, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(editformpimpon.statut, 'Statut : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(editformpimpon.statut, {'attr': {'class': 'form-control'}}) }}
+        </div>
+    <a class="btn btn-danger"
+       href="{{ path('home_formation_pimpon') }}"
+       role="button">Retour</a>
+    <button type="submit" class="btn btn-primary">Modifier</button>
+    {{ form_end(editformpimpon) }}
+
+</div>
+{% endblock %}
