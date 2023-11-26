@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello FormationController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Formation
+        <a class="btn btn-primary"
+           href="{{ path('add_formation') }}"
+           role="button">Ajouter</a>
+    </h1>
+    <br>
+    <h2>Liste des formations</h2>
+    <br>
+    <table class="table" >
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Libelle</th>
+                <th scope="col">Coût</th>
+                <th scope="col">Type</th>
+                <th scope="col">Opérations</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for formation in formations %}
+            <tr>
+                <th scope="row"> {{ formation.id }} </th>
+                <td> {{ formation.libelle }} </td>
+                <td> {{ formation.cout }} </td>
+                <td> {{ formation.type }} </td>
+                <td>
+                    <a class="btn btn-primary"
+                       href="{{ path('edit_formation', {id: formation.id}) }}"
+                       role="button">Edit</a>
+                    <a class="btn btn-danger"
+                       href="{{ path('delete_formation', {id: formation.id}) }}"
+                       role="button">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+</div>
+{% endblock %}
