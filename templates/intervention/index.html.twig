@@ -1,0 +1,54 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello InterventionController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+    <div class="example-wrapper">
+        <h1>Intervention
+            <a class="btn btn-primary"
+               href="{{ path('add_intervention') }}"
+               role="button">Ajouter</a>
+        </h1>
+        <br>
+        <h2>Liste des interventions</h2>
+        <br>
+        <table class="table" >
+            <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Libelle</th>
+                <th scope="col">Date</th>
+                <th scope="col">Durée</th>
+                <th scope="col">Urgence</th>
+                <th scope="col">Conclusion</th>
+                <th scope="col">Opérations</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for intervention in interventions %}
+                <tr>
+                    <th scope="row"> {{ intervention.id }} </th>
+                    <td> {{ intervention.libelle }} </td>
+                    <td> {{ intervention.date.format('Y-m-d') }} </td>
+                    <td> {{ intervention.duree }} </td>
+                    <td> {{ intervention.urgence }} </td>
+                    <td> {{ intervention.conclusion }} </td>
+                    <td>
+                        <a class="btn btn-primary"
+                           href="{{ path('edit_intervention', {id: intervention.id}) }}"
+                           role="button">Edit</a>
+                        <a class="btn btn-danger"
+                           href="{{ path('delete_intervention', {id: intervention.id}) }}"
+                           role="button">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
