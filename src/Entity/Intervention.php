@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\InterventionRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -28,6 +30,14 @@ class Intervention
 
     #[ORM\Column(length: 255)]
     private ?string $conclusion = null;
+
+    #[ORM\OneToMany(mappedBy: 'idIntervention', targetEntity: DetailIntervention::class)]
+    private Collection $detailInterventions;
+
+    public function __construct()
+    {
+        $this->detailInterventions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -90,6 +100,36 @@ class Intervention
     public function setConclusion(string $conclusion): static
     {
         $this->conclusion = $conclusion;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DetailIntervention>
+     */
+    public function getDetailInterventions(): Collection
+    {
+        return $this->detailInterventions;
+    }
+
+    public function addDetailIntervention(DetailIntervention $detailIntervention): static
+    {
+        if (!$this->detailInterventions->contains($detailIntervention)) {
+            $this->detailInterventions->add($detailIntervention);
+            $detailIntervention->setIdIntervention($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailIntervention(DetailIntervention $detailIntervention): static
+    {
+        if ($this->detailInterventions->removeElement($detailIntervention)) {
+            // set the owning side to null (unless already changed)
+            if ($detailIntervention->getIdIntervention() === $this) {
+                $detailIntervention->setIdIntervention(null);
+            }
+        }
 
         return $this;
     }

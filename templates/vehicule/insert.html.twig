@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CompanieController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Véhicule</h1>
+    <br>
+    <h2>Ajout véhicule</h2>
+    <br>
+    {{ form_start(formV, { 'attr': { 'class': 'form-horizontal'}}) }}
+        <div class="mb-3">
+            {{ form_label(formV.matricule, 'Matricule : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formV.matricule, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(formV.marque, 'Marque : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formV.marque, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(formV.place, 'Nb places : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formV.place, {'attr': {'class': 'form-control'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(formV.idCaserne, 'Caserne : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formV.idCaserne, {'attr': {'class': 'form-select'}}) }}
+        </div>
+        <div class="mb-3">
+            {{ form_label(formV.idType, 'Type : ', {'label_attr': {'class': 'form-label'}}) }}
+            {{ form_widget(formV.idType, {'attr': {'class': 'form-select'}}) }}
+        </div>
+        <a class="btn btn-danger"
+           href="{{ path('home_vehicule') }}"
+           role="button">Retour</a>
+        <button type="submit" class="btn btn-primary">Ajouter</button>
+    {{ form_end(formV) }}
+
+</div>
+{% endblock %}

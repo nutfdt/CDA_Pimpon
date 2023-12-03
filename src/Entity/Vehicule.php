@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\VehiculeRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: VehiculeRepository::class)]
@@ -27,6 +29,14 @@ class Vehicule
 
     #[ORM\ManyToOne(inversedBy: 'vehicules')]
     private ?Type $idType = null;
+
+    #[ORM\OneToMany(mappedBy: 'idVehicule', targetEntity: DetailIntervention::class)]
+    private Collection $detailInterventions;
+
+    public function __construct()
+    {
+        $this->detailInterventions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -89,6 +99,36 @@ class Vehicule
     public function setIdType(?Type $idType): static
     {
         $this->idType = $idType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DetailIntervention>
+     */
+    public function getDetailInterventions(): Collection
+    {
+        return $this->detailInterventions;
+    }
+
+    public function addDetailIntervention(DetailIntervention $detailIntervention): static
+    {
+        if (!$this->detailInterventions->contains($detailIntervention)) {
+            $this->detailInterventions->add($detailIntervention);
+            $detailIntervention->setIdVehicule($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailIntervention(DetailIntervention $detailIntervention): static
+    {
+        if ($this->detailInterventions->removeElement($detailIntervention)) {
+            // set the owning side to null (unless already changed)
+            if ($detailIntervention->getIdVehicule() === $this) {
+                $detailIntervention->setIdVehicule(null);
+            }
+        }
 
         return $this;
     }

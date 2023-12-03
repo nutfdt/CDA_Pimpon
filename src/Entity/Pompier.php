@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\PompierRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PompierRepository::class)]
@@ -33,6 +35,14 @@ class Pompier
 
     #[ORM\Column(length: 50)]
     private ?string $mdp = null;
+
+    #[ORM\OneToMany(mappedBy: 'idPompier', targetEntity: DetailIntervention::class)]
+    private Collection $detailInterventions;
+
+    public function __construct()
+    {
+        $this->detailInterventions = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -119,6 +129,36 @@ class Pompier
     public function setMdp(string $mdp): static
     {
         $this->mdp = $mdp;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, DetailIntervention>
+     */
+    public function getDetailInterventions(): Collection
+    {
+        return $this->detailInterventions;
+    }
+
+    public function addDetailIntervention(DetailIntervention $detailIntervention): static
+    {
+        if (!$this->detailInterventions->contains($detailIntervention)) {
+            $this->detailInterventions->add($detailIntervention);
+            $detailIntervention->setIdPompier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDetailIntervention(DetailIntervention $detailIntervention): static
+    {
+        if ($this->detailInterventions->removeElement($detailIntervention)) {
+            // set the owning side to null (unless already changed)
+            if ($detailIntervention->getIdPompier() === $this) {
+                $detailIntervention->setIdPompier(null);
+            }
+        }
 
         return $this;
     }
