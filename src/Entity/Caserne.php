@@ -30,9 +30,13 @@ class Caserne
     #[ORM\OneToMany(mappedBy: 'idCaserne', targetEntity: Stock::class)]
     private Collection $stocks;
 
+    #[ORM\OneToMany(mappedBy: 'idCaserne', targetEntity: Vehicule::class)]
+    private Collection $vehicules;
+
     public function __construct()
     {
         $this->stocks = new ArrayCollection();
+        $this->vehicules = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -112,6 +116,36 @@ class Caserne
             // set the owning side to null (unless already changed)
             if ($stock->getIdCaserne() === $this) {
                 $stock->setIdCaserne(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Vehicule>
+     */
+    public function getVehicules(): Collection
+    {
+        return $this->vehicules;
+    }
+
+    public function addVehicule(Vehicule $vehicule): static
+    {
+        if (!$this->vehicules->contains($vehicule)) {
+            $this->vehicules->add($vehicule);
+            $vehicule->setIdCaserne($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVehicule(Vehicule $vehicule): static
+    {
+        if ($this->vehicules->removeElement($vehicule)) {
+            // set the owning side to null (unless already changed)
+            if ($vehicule->getIdCaserne() === $this) {
+                $vehicule->setIdCaserne(null);
             }
         }
 
