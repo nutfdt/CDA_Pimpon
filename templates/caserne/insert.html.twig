@@ -3,38 +3,110 @@
 {% block title %}Hello CompanieController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        body { background: #000A5A; }
+        .navbar { background-color: #212E9A; border-bottom: 3px solid white; }
+        .footer { background-color: #212E9A; border-top: 3px solid white; width: 100%; height: 50px; margin-top: 260px; }
+        .footer p { color:#F5F5F5; text-align:center; font-size:20px; margin-top: 5px; }
 
-<div class="example-wrapper">
-    <h1>Caserne</h1>
+        h1, h2 {
+            text-align: center;
+            color: #F5F5F5;
+            font-size: xx-large;
+        }
+
+        .rejoigneznous {
+            background-color: #F5F5F5;
+            text-align:center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: xx-large;
+            margin-top: 50px;
+            padding-bottom: 1px;
+        }
+
+        .rejoigneznous p {
+            font-size: xx-large;
+            font-weight: bold;
+
+        }
+
+        .custom-label label {
+            color: white; /* ou la couleur que vous souhaitez */
+        }
+
+        .centre {
+            margin-top: 40px;
+        }
+
+    </style>
+
+<body>
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img style="height: 60px;" src="{{ asset('img/SDPD.png') }}"/></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        </div>
+    </div>
+</nav>
+
+<div class="rejoigneznous container">
+    <p>CASERNE</p>
+</div>
+
+
     <br>
     <h2>Ajout caserne</h2>
     <br>
-    {{ form_start(formC, { 'attr': { 'class': 'form-horizontal'}}) }}
-        <div class="mb-3">
-            {{ form_label(formC.adresse, 'Adresse : ', {'label_attr': {'class': 'form-label'}}) }}
-            {{ form_widget(formC.adresse, {'attr': {'class': 'form-control'}}) }}
+{{ form_start(formC, { 'attr': { 'class': 'form-horizontal' } }) }}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="mb-3 custom-label">
+                {{ form_label(formC.adresse, 'Adresse : ', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(formC.adresse, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+            </div>
         </div>
-        <div class="mb-3">
-            {{ form_label(formC.ville, 'Ville : ', {'label_attr': {'class': 'form-label'}}) }}
-            {{ form_widget(formC.ville, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="mb-3 custom-label">
+                {{ form_label(formC.ville, 'Ville : ', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(formC.ville, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+            </div>
         </div>
-        <div class="mb-3">
-            {{ form_label(formC.codePostal, 'Code postal : ', {'label_attr': {'class': 'form-label'}}) }}
-            {{ form_widget(formC.codePostal, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="mb-3 custom-label">
+                {{ form_label(formC.codePostal, 'Code postal : ', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(formC.codePostal, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+            </div>
         </div>
-        <div class="mb-3">
-            {{ form_label(formC.idCompanie, 'Companie : ', {'label_attr': {'class': 'form-label'}}) }}
-            {{ form_widget(formC.idCompanie, {'attr': {'class': 'form-select'}}) }}
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="mb-3 custom-label">
+                {{ form_label(formC.idCompanie, 'Companie : ', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(formC.idCompanie, {'attr': {'class': 'form-select', 'required': 'required'}}) }}
+            </div>
         </div>
-        <a class="btn btn-danger"
-           href="{{ path('home_caserne') }}"
-           role="button">Retour</a>
-        <button type="submit" class="btn btn-primary">Ajouter</button>
-    {{ form_end(formC) }}
-
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <a class="btn btn-danger" href="{{ path('home_caserne') }}" role="button">Retour</a>
+            <button type="submit" class="btn btn-primary">Ajouter</button>
+        </div>
+    </div>
 </div>
+{{ form_end(formC) }}
+
+<footer class="footer">
+    <p> Copyright © 2023 Brigade de sapeurs-pompiers de Paris </p>
+</footer>
+</body>
 {% endblock %}
