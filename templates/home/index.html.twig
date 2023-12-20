@@ -1,16 +1,205 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %} Accueil {% endblock %}
 
 {% block body %}
 <style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    body { background: #000A5A; }
+    .navbar { background-color: #212E9A; border-bottom: 3px solid white; }
+    .medias { margin-top: 25px; margin-left: 50px; }
+    .articles { padding-left: 500px; }
+    .videos { color:#F5F5F5; flex-direction: column; }
+    .rejoigneznous {
+        background-color: #F5F5F5;
+        text-align:center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: xx-large;
+        padding-top: 1px;
+    }
+    .footer { background-color: #212E9A; border-top: 3px solid white; width: 100%; height: 50px; margin-top: 200px; }
+    .footer p { color:#F5F5F5; text-align:center; font-size:20px; margin-top: 5px; }
+    .containera {
+        display: flex;
+        flex-direction: row;
+        align-items: center; /* aligner les éléments verticalement au centre si nécessaire */
+        margin-bottom: 10px;
+        justify-content: space-between;
+    }
 
-<div class="example-wrapper">
-    <h1>Home</h1>
-    <br>
-    <p>Ouai flemme, c'est l'accueil quoi...</p>
+    .containera img {
+        height: 60px;
+        margin-right: 10px; /* ajouter une marge à droite de l'image pour l'espace */
+    }
+
+    .containera p {
+        margin: 0; /* supprimer la marge par défaut du paragraphe */
+        color: white;
+        text-align: right;
+    }
+
+    .formulaire {
+        position: relative;
+        margin-bottom: 10px;
+    }
+
+    .formulaire img {
+        height: 250px;
+        margin-right: 10px; /* ajouter une marge à droite de l'image pour l'espace */
+    }
+
+    .text-form {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 352px;
+        background-color: red;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        margin-left: 10px;
+        font-weight: bold;
+        font-size: x-large;
+    }
+
+    .article img {
+        width: 80px;
+        height: 80px;
+        margin-right: 15px;
+    }
+
+    .article-content {
+        flex: 1;
+    }
+
+    .article-content h2 {
+        color: #F5F5F5;
+        font-size: medium;
+    }
+
+    .article-content p {
+        color: #F5F5F5;
+        font-size: small;
+    }
+</style>
+<body>
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="/"><img style="height: 60px;" src="{{ asset('img/SDPD.png') }}"/></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+        </div>
+    </div>
+</nav>
+<div class="medias container">
+    <div class="row">
+    <div class="videos col-6">
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/5Vd5tjPRoXU?si=236o5jftNGHCKOKe" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <div class="articles col-6">
+        <div class="article">
+            <img src="{{ asset('img/pompier.jpg') }}" alt="Article Image">
+            <div class="article-content">
+                <h2>NOUVELLE VIDEO</h2>
+                <p class="row">24H EN IMMERSION AVEC LES POMPIERS DE PARIS</p>
+            </div>
+        </div>
+
+        <div class="article">
+            <img src="{{ asset('img/pompier.jpg') }}" alt="Article Image">
+            <div class="article-content">
+                <h2>NOUVELLE VIDEO</h2>
+                <p>24H EN IMMERSION AVEC LES POMPIERS DE PARIS</p>
+            </div>
+        </div>
+
+        <div class="article">
+            <img src="{{ asset('img/pompier.jpg') }}" alt="Article Image">
+            <div class="article-content">
+                <h2>NOUVELLE VIDEO</h2>
+                <p>24H EN IMMERSION AVEC LES POMPIERS DE PARIS</p>
+            </div>
+        </div>
+    </div>
+    </div>
 </div>
+
+</div>
+
+<div class="rejoigneznous container">
+    <p>REJOIGNEZ NOUS UWU</p>
+</div>
+
+    <div class="pages container">
+        <div class="row">
+            <div class="formulaire container col-4">
+                <div>
+                    <a class="navbar-brand" href="{{ path('home_caserne') }}">
+                        <img src="{{ asset('img/pompier.jpg') }}" />
+                        <div class="text-form">
+                            NOS CASERNES
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="formulaire container col-4">
+                <div>
+                    <a class="navbar-brand" href="{{ path('home_companie') }}">
+                        <img src="{{ asset('img/pompier.jpg') }}" />
+                        <div class="text-form">
+                            NOS COMPANIES
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="formulaire container col-4">
+                <div>
+                    <a class="navbar-brand" href="{{ path('home_pompier') }}">
+                        <img src="{{ asset('img/pompier.jpg') }}" />
+                        <div class="text-form">
+                            NOS POMPIERS
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="formulaire container col-4">
+                    <div>
+                        <a class="navbar-brand" href="{{ path('home_formation') }}">
+                            <img src="{{ asset('img/pompier.jpg') }}" />
+                            <div class="text-form">
+                                NOS FORMATIONS
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="formulaire container col-4">
+                    <div>
+                        <a class="navbar-brand" href="{{ path('home_equipement') }}">
+                            <img src="{{ asset('img/pompier.jpg') }}" />
+                            <div class="text-form">
+                                NOS EQUIPEMENTS
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="formulaire container col-4">
+                    <div>
+                        <a class="navbar-brand" href="{{ path('home_stock') }}">
+                            <img src="{{ asset('img/pompier.jpg') }}" />
+                            <div class="text-form">
+                                NOS STOCKS
+                            </div>
+                        </a>
+                    </div>
+                </div>
+        </div>
+        </div>
+    </div>
+<footer class="footer">
+    <p> Copyright © 2023 Brigade de sapeurs-pompiers de Paris </p>
+</footer>
+    </body>
 {% endblock %}
