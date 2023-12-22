@@ -15,32 +15,47 @@ class Vehicule
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 70)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 20)]
     private ?string $matricule = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 70)]
     private ?string $marque = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $place = null;
+    #[ORM\Column]
+    private ?int $place = null;
+
+    #[ORM\ManyToOne(inversedBy: 'vehicules')]
+    private ?Type $type = null;
 
     #[ORM\ManyToOne(inversedBy: 'vehicules')]
     private ?Caserne $idCaserne = null;
 
-    #[ORM\ManyToOne(inversedBy: 'vehicules')]
-    private ?Type $idType = null;
-
-    #[ORM\OneToMany(mappedBy: 'idVehicule', targetEntity: DetailIntervention::class)]
-    private Collection $detailInterventions;
+    #[ORM\OneToMany(mappedBy: 'idVehicule', targetEntity: Intervention::class)]
+    private Collection $interventions;
 
     public function __construct()
     {
-        $this->detailInterventions = new ArrayCollection();
+        $this->interventions = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
     }
 
     public function getMatricule(): ?string
@@ -67,14 +82,26 @@ class Vehicule
         return $this;
     }
 
-    public function getPlace(): ?string
+    public function getPlace(): ?int
     {
         return $this->place;
     }
 
-    public function setPlace(string $place): static
+    public function setPlace(int $place): static
     {
         $this->place = $place;
+
+        return $this;
+    }
+
+    public function getType(): ?Type
+    {
+        return $this->type;
+    }
+
+    public function setType(?Type $type): static
+    {
+        $this->type = $type;
 
         return $this;
     }
@@ -91,42 +118,30 @@ class Vehicule
         return $this;
     }
 
-    public function getIdType(): ?Type
-    {
-        return $this->idType;
-    }
-
-    public function setIdType(?Type $idType): static
-    {
-        $this->idType = $idType;
-
-        return $this;
-    }
-
     /**
-     * @return Collection<int, DetailIntervention>
+     * @return Collection<int, Intervention>
      */
-    public function getDetailInterventions(): Collection
+    public function getInterventions(): Collection
     {
-        return $this->detailInterventions;
+        return $this->interventions;
     }
 
-    public function addDetailIntervention(DetailIntervention $detailIntervention): static
+    public function addIntervention(Intervention $intervention): static
     {
-        if (!$this->detailInterventions->contains($detailIntervention)) {
-            $this->detailInterventions->add($detailIntervention);
-            $detailIntervention->setIdVehicule($this);
+        if (!$this->interventions->contains($intervention)) {
+            $this->interventions->add($intervention);
+            $intervention->setIdVehicule($this);
         }
 
         return $this;
     }
 
-    public function removeDetailIntervention(DetailIntervention $detailIntervention): static
+    public function removeIntervention(Intervention $intervention): static
     {
-        if ($this->detailInterventions->removeElement($detailIntervention)) {
+        if ($this->interventions->removeElement($intervention)) {
             // set the owning side to null (unless already changed)
-            if ($detailIntervention->getIdVehicule() === $this) {
-                $detailIntervention->setIdVehicule(null);
+            if ($intervention->getIdVehicule() === $this) {
+                $intervention->setIdVehicule(null);
             }
         }
 

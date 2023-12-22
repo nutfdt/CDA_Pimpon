@@ -16,27 +16,33 @@ class Intervention
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 50)]
     private ?string $libelle = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     private ?\DateTimeInterface $date = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $duree = null;
+    #[ORM\Column(type: Types::TIME_MUTABLE)]
+    private ?\DateTimeInterface $heure = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column]
+    private ?int $duree = null;
+
+    #[ORM\Column(length: 70)]
     private ?string $urgence = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 150)]
     private ?string $conclusion = null;
 
-    #[ORM\OneToMany(mappedBy: 'idIntervention', targetEntity: DetailIntervention::class)]
-    private Collection $detailInterventions;
+    #[ORM\ManyToOne(inversedBy: 'interventions')]
+    private ?Vehicule $idVehicule = null;
+
+    #[ORM\ManyToMany(targetEntity: Pompier::class, inversedBy: 'interventions')]
+    private Collection $pompiers;
 
     public function __construct()
     {
-        $this->detailInterventions = new ArrayCollection();
+        $this->pompiers = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -68,12 +74,24 @@ class Intervention
         return $this;
     }
 
-    public function getDuree(): ?string
+    public function getHeure(): ?\DateTimeInterface
+    {
+        return $this->heure;
+    }
+
+    public function setHeure(\DateTimeInterface $heure): static
+    {
+        $this->heure = $heure;
+
+        return $this;
+    }
+
+    public function getDuree(): ?int
     {
         return $this->duree;
     }
 
-    public function setDuree(string $duree): static
+    public function setDuree(int $duree): static
     {
         $this->duree = $duree;
 
@@ -104,32 +122,38 @@ class Intervention
         return $this;
     }
 
-    /**
-     * @return Collection<int, DetailIntervention>
-     */
-    public function getDetailInterventions(): Collection
+    public function getIdVehicule(): ?Vehicule
     {
-        return $this->detailInterventions;
+        return $this->idVehicule;
     }
 
-    public function addDetailIntervention(DetailIntervention $detailIntervention): static
+    public function setIdVehicule(?Vehicule $idVehicule): static
     {
-        if (!$this->detailInterventions->contains($detailIntervention)) {
-            $this->detailInterventions->add($detailIntervention);
-            $detailIntervention->setIdIntervention($this);
+        $this->idVehicule = $idVehicule;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Pompier>
+     */
+    public function getPompiers(): Collection
+    {
+        return $this->pompiers;
+    }
+
+    public function addPompier(Pompier $pompier): static
+    {
+        if (!$this->pompiers->contains($pompier)) {
+            $this->pompiers->add($pompier);
         }
 
         return $this;
     }
 
-    public function removeDetailIntervention(DetailIntervention $detailIntervention): static
+    public function removePompier(Pompier $pompier): static
     {
-        if ($this->detailInterventions->removeElement($detailIntervention)) {
-            // set the owning side to null (unless already changed)
-            if ($detailIntervention->getIdIntervention() === $this) {
-                $detailIntervention->setIdIntervention(null);
-            }
-        }
+        $this->pompiers->removeElement($pompier);
 
         return $this;
     }

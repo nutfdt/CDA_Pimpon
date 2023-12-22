@@ -7,9 +7,9 @@ use App\Form\PompierType;
 use App\Repository\PompierRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\HttpFoundation\Request;
 
 class PompierController extends AbstractController
 {
@@ -36,11 +36,11 @@ class PompierController extends AbstractController
         }
 
         return $this->render('pompier/insert.html.twig', [
-           'formP'=>$formP,
+            'formP'=>$formP,
         ]);
     }
 
-    #[Route('pompierDelete/{id}', name: 'delete_pompier')]
+    #[Route('/pompierDelete/{id}', name: 'delete_pompier')]
     public function delete($id, EntityManagerInterface $entitMana, PompierRepository $pompierRepo) : Response
     {
         $pompier=$pompierRepo->find(['id'=>$id]);
@@ -51,7 +51,7 @@ class PompierController extends AbstractController
         return $this->redirectToRoute('home_pompier');
     }
 
-    #[Route('pompierEdit/{id}', name: 'edit_pompier')]
+    #[Route('/pompierEdit/{id}', name: 'edit_pompier')]
     public function update($id, EntityManagerInterface $entityMana, PompierRepository $pompierRepo, Request $req) : Response
     {
         $pompier=$pompierRepo->find(['id'=>$id]);

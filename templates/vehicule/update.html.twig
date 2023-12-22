@@ -1,44 +1,123 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CompanieController!{% endblock %}
+{% block title %}Modification du véhicule{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        body { background: #000A5A; }
+        .navbar { background-color: #212E9A; border-bottom: 3px solid white; }
+        .footer { background-color: #212E9A; border-top: 3px solid white; width: 100%; height: 50px; margin-top: 50px; }
+        .footer p { color:#F5F5F5; text-align:center; font-size:20px; margin-top: 5px; }
 
-<div class="example-wrapper">
-    <h1>Véhicule</h1>
-    <br>
-    <h2>Modification du véhicule</h2>
-    <br>
-    {{ form_start(editFormV, { 'attr': { 'class': 'form-horizontal'}}) }}
-    <div class="mb-3">
-        {{ form_label(editFormV.matricule, 'Matricule : ', {'label_attr': {'class': 'form-label'}}) }}
-        {{ form_widget(editFormV.matricule, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="mb-3">
-        {{ form_label(editFormV.marque, 'Marque : ', {'label_attr': {'class': 'form-label'}}) }}
-        {{ form_widget(editFormV.marque, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="mb-3">
-        {{ form_label(editFormV.place, 'Place : ', {'label_attr': {'class': 'form-label'}}) }}
-        {{ form_widget(editFormV.place, {'attr': {'class': 'form-control'}}) }}
-    </div>
-    <div class="mb-3">
-        {{ form_label(editFormV.idCaserne, 'Caserne : ', {'label_attr': {'class': 'form-label'}}) }}
-        {{ form_widget(editFormV.idCaserne, {'attr': {'class': 'form-select'}}) }}
-    </div>
-    <div class="mb-3">
-        {{ form_label(editFormV.idType, 'Type : ', {'label_attr': {'class': 'form-label'}}) }}
-        {{ form_widget(editFormV.idType, {'attr': {'class': 'form-select'}}) }}
-    </div>
-    <a class="btn btn-danger"
-       href="{{ path('home_vehicule') }}"
-       role="button">Retour</a>
-    <button type="submit" class="btn btn-primary">Modifier</button>
-    {{ form_end(editFormV) }}
+        h1, h2 {
+            text-align: center;
+            color: #F5F5F5;
+            font-size: xx-large;
+        }
 
-</div>
+        .rejoigneznous {
+            background-color: #F5F5F5;
+            text-align:center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: xx-large;
+            margin-top: 50px;
+            padding-bottom: 1px;
+        }
+
+        .rejoigneznous p {
+            font-size: xx-large;
+            font-weight: bold;
+        }
+
+        .custom-label label {
+            color: white;
+        }
+
+        .centre {
+            margin-top: 40px;
+        }
+    </style>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><img style="height: 60px;" src="{{ asset('img/SDPD.png') }}"/></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            </div>
+        </div>
+    </nav>
+
+    <div class="rejoigneznous container">
+        <p>VEHICULE</p>
+    </div>
+
+    <div class="centre">
+        <h2>Modification d'un véhicule</h2>
+
+        {{ form_start(editFormV, { 'attr': { 'class': 'form-horizontal' } }) }}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mb-3 custom-label">
+                        {{ form_label(editFormV.nom, 'Nom : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(editFormV.nom, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mb-3 custom-label">
+                        {{ form_label(editFormV.matricule, 'Matricule : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(editFormV.matricule, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mb-3 custom-label">
+                        {{ form_label(editFormV.marque, 'Marque : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(editFormV.marque, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mb-3 custom-label">
+                        {{ form_label(editFormV.place, 'Nb Place : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(editFormV.place, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mb-3 custom-label">
+                        {{ form_label(editFormV.type, 'Type : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(editFormV.type, {'attr': {'class': 'form-select', 'required': 'required'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mb-3 custom-label">
+                        {{ form_label(editFormV.idCaserne, 'Caserne : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(editFormV.idCaserne, {'attr': {'class': 'form-select', 'required': 'required'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <a class="btn btn-danger" href="{{ path('home_vehicule') }}" role="button">Retour</a>
+                    <button type="submit" class="btn btn-primary">Modifier</button>
+                </div>
+            </div>
+        </div>
+        {{ form_end(editFormV) }}
+    </div>
+
+    <footer class="footer">
+        <p> Copyright © 2023 Brigade de sapeurs-pompiers de Paris </p>
+    </footer>
 {% endblock %}

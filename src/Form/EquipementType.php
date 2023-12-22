@@ -15,7 +15,8 @@ class EquipementType extends AbstractType
             ->add('nom')
             ->add('reference')
             ->add('libelle')
-            ->add('contact')
+            ->add('nomContact')
+            ->add('telContact')
         ;
     }
 

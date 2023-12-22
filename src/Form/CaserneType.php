@@ -14,9 +14,8 @@ class CaserneType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('nom')
             ->add('adresse')
-            ->add('ville')
-            ->add('codePostal')
             ->add('idCompanie', EntityType::class, [
                 'class'=>Companie::class,
                 'choice_label'=>'nom',

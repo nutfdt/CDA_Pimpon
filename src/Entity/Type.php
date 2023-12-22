@@ -15,10 +15,10 @@ class Type
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 150)]
     private ?string $libelle = null;
 
-    #[ORM\OneToMany(mappedBy: 'idType', targetEntity: Vehicule::class)]
+    #[ORM\OneToMany(mappedBy: 'type', targetEntity: Vehicule::class)]
     private Collection $vehicules;
 
     public function __construct()
@@ -55,7 +55,7 @@ class Type
     {
         if (!$this->vehicules->contains($vehicule)) {
             $this->vehicules->add($vehicule);
-            $vehicule->setIdType($this);
+            $vehicule->setType($this);
         }
 
         return $this;
@@ -65,8 +65,8 @@ class Type
     {
         if ($this->vehicules->removeElement($vehicule)) {
             // set the owning side to null (unless already changed)
-            if ($vehicule->getIdType() === $this) {
-                $vehicule->setIdType(null);
+            if ($vehicule->getType() === $this) {
+                $vehicule->setType(null);
             }
         }
 

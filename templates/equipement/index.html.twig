@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello EquipementController!{% endblock %}
+{% block title %}Liste des Equipements{% endblock %}
 
 {% block body %}
     <style>
@@ -69,7 +69,7 @@
 
                         <div class="card-body">
                             <h5 class="card-title"> {{ equipement.reference }} | {{ equipement.nom }}</h5>
-                            <p class="card-text">Libellé : {{ equipement.libelle }} | Contact : {{ equipement.contact }}</p>
+                            <p class="card-text">Libellé : {{ equipement.libelle }} | Contact : {{ equipement.nomContact }} |{{ equipement.telContact }}</p>
                             <a class="btn btn-primary"
                                href="{{ path('edit_equipement', {id: equipement.id}) }}"
                                role="button">Edit</a>

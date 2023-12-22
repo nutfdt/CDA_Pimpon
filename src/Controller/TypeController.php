@@ -22,18 +22,16 @@ class TypeController extends AbstractController
             'types' => $lesTypes,
         ]);
     }
-
     #[Route('/typeAdd', name: 'add_type')]
     public function add(Request $req, EntityManagerInterface $entityMana) : Response
     {
-        $type= new Type();
-        $formT= $this->createForm(TypeVType::class, $type);
+        $type=new Type();
+        $formT=$this->createForm(TypeVType::class, $type);
         $formT->handleRequest($req);
 
         if($formT->isSubmitted() && $formT->isValid()){
             $entityMana->persist($type);
             $entityMana->flush($type);
-
             return $this->redirectToRoute('home_type');
         }
         return $this->render('type/insert.html.twig', [
@@ -41,8 +39,8 @@ class TypeController extends AbstractController
         ]);
     }
 
-    #[Route('/typeDelete/{id}', name: 'delete_type')]
-    public function delete($id, EntityManagerInterface $entityMana, TypeRepository $typeRepo) : Response
+    #[Route('/typeDelete/{id}', name:'delete_type')]
+    public function delete($id, EntityManagerInterface $entityMana, TypeRepository $typeRepo) :Response
     {
         $type=$typeRepo->find(['id'=>$id]);
         $entityMana->remove($type);
@@ -52,18 +50,15 @@ class TypeController extends AbstractController
     }
 
     #[Route('/typeEdit/{id}', name: 'edit_type')]
-    public function update($id, EntityManagerInterface $entityMana, TypeRepository $typeRepo, Request $req) : Response
+    public function update($id, EntityManagerInterface $entityMana, TypeRepository $typeRepo, Request $req):Response
     {
         $type=$typeRepo->find(['id'=>$id]);
         $editFormT=$this->createForm(TypeVType::class, $type);
         $editFormT->handleRequest($req);
-
         if($editFormT->isSubmitted() && $editFormT->isValid()){
             $entityMana->flush();
-
             return $this->redirectToRoute('home_type');
         }
-
         return $this->render('type/update.html.twig', [
             'editFormT'=>$editFormT,
         ]);

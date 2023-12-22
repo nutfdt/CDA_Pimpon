@@ -89,8 +89,16 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="mb-3 custom-label">
-                        {{ form_label(editFormE.contact, 'Contact : ', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(editFormE.contact, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                        {{ form_label(editFormE.nomContact, 'Nom Contact : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(editFormE.nomContact, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mb-3 custom-label">
+                        {{ form_label(editFormE.telContact, 'Tel Contact : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(editFormE.telContact, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
                     </div>
                 </div>
             </div>

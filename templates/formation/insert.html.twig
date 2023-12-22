@@ -1,45 +1,44 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FormationController!{% endblock %}
+{% block title %}Ajout d'une Formation{% endblock %}
 
 {% block body %}
-<style>
-    body { background: #000A5A; }
-    .navbar { background-color: #212E9A; border-bottom: 3px solid white; }
-    .footer { background-color: #212E9A; border-top: 3px solid white; width: 100%; height: 50px; margin-top: 50px; }
-    .footer p { color:#F5F5F5; text-align:center; font-size:20px; margin-top: 5px; }
+    <style>
+        body { background: #000A5A; }
+        .navbar { background-color: #212E9A; border-bottom: 3px solid white; }
+        .footer { background-color: #212E9A; border-top: 3px solid white; width: 100%; height: 50px; margin-top: 50px; }
+        .footer p { color:#F5F5F5; text-align:center; font-size:20px; margin-top: 5px; }
 
-    h1, h2 {
-        text-align: center;
-        color: #F5F5F5;
-        font-size: xx-large;
-    }
+        h1, h2 {
+            text-align: center;
+            color: #F5F5F5;
+            font-size: xx-large;
+        }
 
-    .rejoigneznous {
-        background-color: #F5F5F5;
-        text-align:center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: xx-large;
-        margin-top: 50px;
-        padding-bottom: 1px;
-    }
+        .rejoigneznous {
+            background-color: #F5F5F5;
+            text-align:center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: xx-large;
+            margin-top: 50px;
+            padding-bottom: 1px;
+        }
 
-    .rejoigneznous p {
-        font-size: xx-large;
-        font-weight: bold;
+        .rejoigneznous p {
+            font-size: xx-large;
+            font-weight: bold;
+        }
 
-    }
+        .custom-label label {
+            color: white; /* ou la couleur que vous souhaitez */
+        }
 
-    .custom-label label {
-        color: white; /* ou la couleur que vous souhaitez */
-    }
+        .centre {
+            margin-top: 40px;
+        }
 
-    .centre {
-        margin-top: 40px;
-    }
-
-</style>
+    </style>
 
     <body>
 
@@ -58,51 +57,72 @@
         <p>FORMATION</p>
     </div>
 
-<div class="centre">
-    <h2>Ajout formation</h2>
+    <div class="centre">
+        <h2>Ajout formation</h2>
 
-
-    {{ form_start(formF, { 'attr': { 'class': 'form-horizontal' } }) }}
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="mb-3 custom-label">
-                    {{ form_label(formF.libelle, 'Libelle : ', {'label_attr': {'class': 'form-label'}}) }}
-                    {{ form_widget(formF.libelle, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+        {{ form_start(formF, { 'attr': { 'class': 'form-horizontal' } }) }}
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mb-3 custom-label">
+                        {{ form_label(formF.libelle, 'Libellé : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(formF.libelle, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mb-3 custom-label">
+                        {{ form_label(formF.cout, 'Cout : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(formF.cout, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mb-3 custom-label">
+                        {{ form_label(formF.adresse, 'Adresse : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(formF.adresse, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mb-3 custom-label">
+                        {{ form_label(formF.date, 'Date : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(formF.date, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mb-3 custom-label">
+                        {{ form_label(formF.heure, 'Heure : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(formF.heure, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <div class="mb-3 custom-label">
+                        {{ form_label(formF.duree, 'Durée : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(formF.duree, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-md-6">
+                    <a class="btn btn-danger" href="{{ path('home_formation') }}" role="button">Retour</a>
+                    <button type="submit" class="btn btn-primary">Ajouter</button>
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="mb-3 custom-label">
-                    {{ form_label(formF.cout, 'Coût : ', {'label_attr': {'class': 'form-label'}}) }}
-                    {{ form_widget(formF.cout, {'attr': {'class': 'form-control', 'required': 'required', 'type': 'number'}}) }}
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="mb-3 custom-label">
-                    {{ form_label(formF.type, 'Type : ', {'label_attr': {'class': 'form-label'}}) }}
-                    {{ form_widget(formF.type, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
-                </div>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <a class="btn btn-danger" href="{{ path('home_formation') }}" role="button">Retour</a>
-                <button type="submit" class="btn btn-primary">Ajouter</button>
-            </div>
-        </div>
+        {{ form_end(formF) }}
     </div>
-    {{ form_end(formF) }}
-</div>
 
     <div>
-        <a class="navbar-brand" href="{{ path('add_formation') }}"><img style="height: 300px;" src="{{ asset('img/formation1.png') }}"/></a></div>
-
-
-
+        <a class="navbar-brand" href="{{ path('add_pompier') }}"><img style="height: 300px;" src="{{ asset('img/formation1.png') }}"/></a>
+    </div>
 
     <footer class="footer">
         <p> Copyright © 2023 Brigade de sapeurs-pompiers de Paris </p>

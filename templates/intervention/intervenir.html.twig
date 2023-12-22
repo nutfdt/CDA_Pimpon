@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CompanieController!{% endblock %}
+{% block title %}Intervenir{% endblock %}
 
 {% block body %}
     <style>
@@ -55,59 +55,34 @@
     </nav>
 
     <div class="rejoigneznous container">
-        <p>STOCK</p>
+        <p>INTERVENTION</p>
     </div>
 
     <div class="centre">
-        <h2>Ajout stock</h2>
+        <h2>Intervenir sur l'intervention</h2>
 
-        {{ form_start(formS, { 'attr': { 'class': 'form-horizontal' } }) }}
+        {{ form_start(intervenirForm) }}
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="mb-3 custom-label">
-                        {{ form_label(formS.idCaserne, 'Caserne : ', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(formS.idCaserne, {'attr': {'class': 'form-select'}}) }}
+                        {{ form_label(intervenirForm.pompier, 'Pompier : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(intervenirForm.pompier, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-6">
-                    <div class="mb-3 custom-label">
-                        {{ form_label(formS.idEquipement, 'Equipement : ', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(formS.idEquipement, {'attr': {'class': 'form-select'}}) }}
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="mb-3 custom-label">
-                        {{ form_label(formS.quantite, 'Quantité : ', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(formS.quantite, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="mb-3 custom-label">
-                        {{ form_label(formS.limiteStock, 'Limite Stock : ', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(formS.limiteStock, {'attr': {'class': 'form-control'}}) }}
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <a class="btn btn-danger" href="{{ path('home_stock') }}" role="button">Retour</a>
+                    <a class="btn btn-danger" href="{{ path('home_intervention') }}" role="button">Retour</a>
                     <button type="submit" class="btn btn-primary">Ajouter</button>
                 </div>
             </div>
         </div>
-        {{ form_end(formS) }}
-
+        {{ form_end(intervenirForm) }}
     </div>
 
     <div>
-        <a class="navbar-brand" href="{{ path('add_stock') }}"><img style="height: 300px;" src="{{ asset('img/formation1.png') }}"/></a></div>
+        <a class="navbar-brand" href="{{ path('add_formation') }}"><img style="height: 300px;" src="{{ asset('img/formation1.png') }}"/></a></div>
 
 
 

@@ -1,46 +1,88 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello TypeController!{% endblock %}
+{% block title %}Liste des Types{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+    <style>
+        body { background: #000A5A; }
+        .navbar { background-color: #212E9A; border-bottom: 3px solid white; }
+        .footer { background-color: #212E9A; border-top: 3px solid white; width: 100%; height: 50px; margin-top: 250px; }
+        .footer p { color:#F5F5F5; text-align:center; font-size:20px; margin-top: 5px; }
 
-    <div class="example-wrapper">
-        <h1>Type de véhicule
-            <a class="btn btn-primary"
-               href="{{ path('add_type') }}"
-               role="button">Ajouter</a>
-        </h1>
-        <br>
-        <h2>Liste des types de véhicule</h2>
-        <br>
-        <table class="table" >
-            <thead>
-            <tr>
-                <th scope="col">#</th>
-                <th scope="col">Libellé</th>
-                <th scope="col">Opérations</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for type in types %}
-                <tr>
-                    <th scope="row"> {{ type.id }} </th>
-                    <td> {{ type.libelle }} </td>
-                    <td>
-                        <a class="btn btn-primary"
-                           href="{{ path('edit_type', {id: type.id}) }}"
-                           role="button">Edit</a>
-                        <a class="btn btn-danger"
-                           href="{{ path('delete_type', {id: type.id}) }}"
-                           role="button">Delete</a>
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
+        h1, h2 {
+            text-align: center;
+            color: #F5F5F5;
+            font-size: xx-large;
+        }
+
+        .rejoigneznous {
+            background-color: #F5F5F5;
+            text-align:center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: xx-large;
+            margin-top: 50px;
+            padding-bottom: 1px;
+        }
+
+        .rejoigneznous p {
+            font-size: xx-large;
+            font-weight: bold;
+        }
+
+        .custom-label label {
+            color: white;
+        }
+
+        .centre {
+            margin-top: 40px;
+        }
+    </style>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/"><img style="height: 60px;" src="{{ asset('img/SDPD.png') }}"/></a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+            </div>
+        </div>
+    </nav>
+
+    <div class="rejoigneznous container">
+        <p>TYPE <a class="btn btn-primary"
+                       href="{{ path('add_type') }}"
+                       role="button">Ajouter</a></p>
     </div>
+
+    <div class="centre">
+        <h2>Liste des types</h2>
+
+        <div class="container">
+            <div class="row">
+                {% for type in types %}
+                    <div class="col-md-4">
+                        <div class="card mb-3">
+                            <img src="{{ asset('img/pompier.jpg') }}"class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ type.libelle }}</h5>
+                                <a class="btn btn-primary"
+                                   href="{{ path('edit_type', {id: type.id}) }}"
+                                   role="button">Modifier</a>
+                                <a class="btn btn-danger"
+                                   href="{{ path('delete_type', {id: type.id}) }}"
+                                   role="button">Supprimer</a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+    <footer class="footer">
+        <p> Copyright © 2023 Brigade de sapeurs-pompiers de Paris </p>
+    </footer>
 {% endblock %}

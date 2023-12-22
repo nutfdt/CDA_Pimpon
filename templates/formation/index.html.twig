@@ -1,41 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello FormationController!{% endblock %}
+{% block title %}Liste des Formations{% endblock %}
 
 {% block body %}
-<style>
-    body { background: #000A5A; }
-    .navbar { background-color: #212E9A; border-bottom: 3px solid white; }
-    .footer { background-color: #212E9A; border-top: 3px solid white; width: 100%; height: 50px; margin-top: 712px; }
-    .footer p { color:#F5F5F5; text-align:center; font-size:20px; margin-top: 5px; }
-    .rejoigneznous {
-        background-color: #F5F5F5;
-        text-align:center;
-        justify-content: center;
-        font-weight: bold;
-        font-size: xx-large;
-        margin-top: 50px;
-        padding-bottom: 1px;
-    }
+    <style>
+        body { background: #000A5A; }
+        .navbar { background-color: #212E9A; border-bottom: 3px solid white; }
+        .footer { background-color: #212E9A; border-top: 3px solid white; width: 100%; height: 50px; margin-top: 712px; }
+        .footer p { color:#F5F5F5; text-align:center; font-size:20px; margin-top: 5px; }
+        .rejoigneznous {
+            background-color: #F5F5F5;
+            text-align:center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: xx-large;
+            margin-top: 50px;
+            padding-bottom: 1px;
+        }
 
-    .rejoigneznous p {
-        font-size: xx-large;
-        font-weight: bold;
+        .rejoigneznous p {
+            font-size: xx-large;
+            font-weight: bold;
 
-    }
+        }
 
-    h2 {
-        text-align: center;
-        color: #F5F5F5;
-        font-size: xx-large;
+        h2 {
+            text-align: center;
+            color: #F5F5F5;
+            font-size: xx-large;
 
-    }
+        }
 
-    .card {
-        margin-bottom: 25px;
-    }
+        .card {
+            margin-bottom: 25px;
+        }
 
-</style>
+    </style>
     <body>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
@@ -50,37 +50,48 @@
 
     <div class="rejoigneznous container">
         <p>FORMATION             <a class="btn btn-primary"
-                                                href="{{ path('add_formation') }}"
-                                                role="button">Ajouter</a></p>
+                                    href="{{ path('add_formation') }}"
+                                    role="button">Ajouter</a></p>
     </div>
 
-        <br>
-        <h2>Liste des formations</h2>
-        <br>
+    <br>
+    <h2>Liste des formations</h2>
+    <br>
 
-        <div class="container">
-            <div class="row">
-                {% for formation in formations %}
-                    <div class="col-md-4">
-                        <div class="card">
-                            <img src="{{ asset('img/pompier.jpg') }}"class="card-img-top" alt="...">
+    <div class="container">
+        <div class="row">
+            {% for formation in formations %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ asset('img/pompier.jpg') }}"class="card-img-top" alt="...">
 
-                            <div class="card-body">
-                                <h5 class="card-title">{{ formation.libelle }}</h5>
-                                <p class="card-text">Coût : {{ formation.cout }} | Type : {{ formation.type }}</p>
-                                    <a class="btn btn-primary"
-                                       href="{{ path('edit_formation', {id: formation.id}) }}"
-                                       role="button">Edit</a>
-                                    <a class="btn btn-danger delete-formation"
-                                       href="{{ path('delete_formation', {id: formation.id}) }}"
-                                       role="button"
-                                       data-id="{{ formation.id }}">Delete</a>
-                            </div>
+                        <div class="card-body">
+                            <h5 class="card-title">{{ formation.libelle }}</h5>
+                            <p class="card-text">Coût : {{ formation.cout }} | Date : {{ formation.date.format("d-m-Y") }}
+                                <br> Heure : {{ formation.heure.format("H:i") }} | Durée : {{ formation.duree }}h
+                            </p>
+                            <a class="btn btn-primary"
+                               href="{{ path('edit_formation', {id: formation.id}) }}"
+                               role="button">Edit</a>
+                            <a class="btn btn-danger delete-formation"
+                               href="{{ path('delete_formation', {id: formation.id}) }}"
+                               role="button"
+                               data-id="{{ formation.id }}">Delete</a>
+                            <br>
+                            <a class="btn btn-success add-formation"
+                               href="{{ path('join_formation', {id: formation.id}) }}"
+                               role="button"
+                               data-id="{{ formation.id }}">Rejoindre</a>
+                            <a class="btn btn-success add-formation"
+                               href="{{ path('listeFormationPompier', {id: formation.id}) }}"
+                               role="button"
+                               data-id="{{ formation.id }}">Participants</a>
                         </div>
                     </div>
-                {% endfor %}
-            </div>
+                </div>
+            {% endfor %}
         </div>
+    </div>
 
 
     <footer class="footer">

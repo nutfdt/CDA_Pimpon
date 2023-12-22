@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello PompierController!{% endblock %}
+{% block title %}Modification du Pompier{% endblock %}
 
 {% block body %}
     <style>
@@ -113,8 +113,8 @@
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="mb-3 custom-label">
-                        {{ form_label(editFormP.mdp, 'MDP : ', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(editFormP.mdp, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                        {{ form_label(editFormP.idCaserne, 'Caserne : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(editFormP.idCaserne, {'attr': {'class': 'form-select', 'required': 'required'}}) }}
                     </div>
                 </div>
             </div>

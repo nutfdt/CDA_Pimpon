@@ -14,7 +14,10 @@ class FormationType extends AbstractType
         $builder
             ->add('libelle')
             ->add('cout')
-            ->add('type')
+            ->add('adresse')
+            ->add('date')
+            ->add('heure')
+            ->add('duree')
         ;
     }
 

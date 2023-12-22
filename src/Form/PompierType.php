@@ -2,7 +2,9 @@
 
 namespace App\Form;
 
+use App\Entity\Caserne;
 use App\Entity\Pompier;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -15,10 +17,13 @@ class PompierType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('grade')
-            ->add('telephone')
-            ->add('adresse')
             ->add('email')
-            ->add('mdp')
+            ->add('adresse')
+            ->add('telephone')
+            ->add('idCaserne', EntityType::class, [
+                'class'=>Caserne::class,
+                'choice_label'=>'nom',
+            ])
         ;
     }
 

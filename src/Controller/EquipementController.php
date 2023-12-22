@@ -42,7 +42,7 @@ class EquipementController extends AbstractController
         ]);
     }
 
-    #[Route('equipementDelete/{id}', name: 'delete_equipement')]
+    #[Route('/equipementDelete/{id}', name: 'delete_equipement')]
     public function delete($id, EntityManagerInterface $entityMana, EquipementRepository $equipementRepo) :Response
     {
         $equipement=$equipementRepo->find(['id'=>$id]);
@@ -52,7 +52,7 @@ class EquipementController extends AbstractController
         return $this->redirectToRoute('home_equipement');
     }
 
-    #[Route('equipementEdit/{id}', name: 'edit_equipement')]
+    #[Route('/equipementEdit/{id}', name: 'edit_equipement')]
     public function update($id, EntityManagerInterface $entityMana, EquipementRepository $equipementRepo, Request $req) :Response
     {
         $equipement=$equipementRepo->find(['id'=>$id]);

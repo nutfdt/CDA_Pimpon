@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello CompanieController!{% endblock %}
+{% block title %}Ajout Caserne{% endblock %}
 
 {% block body %}
     <style>
@@ -67,24 +67,16 @@
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="mb-3 custom-label">
+                {{ form_label(formC.nom, 'Nom : ', {'label_attr': {'class': 'form-label'}}) }}
+                {{ form_widget(formC.nom, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="mb-3 custom-label">
                 {{ form_label(formC.adresse, 'Adresse : ', {'label_attr': {'class': 'form-label'}}) }}
                 {{ form_widget(formC.adresse, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="mb-3 custom-label">
-                {{ form_label(formC.ville, 'Ville : ', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(formC.ville, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
-            </div>
-        </div>
-    </div>
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <div class="mb-3 custom-label">
-                {{ form_label(formC.codePostal, 'Code postal : ', {'label_attr': {'class': 'form-label'}}) }}
-                {{ form_widget(formC.codePostal, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
             </div>
         </div>
     </div>

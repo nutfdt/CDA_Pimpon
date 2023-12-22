@@ -15,33 +15,37 @@ class Pompier
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 70)]
     private ?string $nom = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 70)]
     private ?string $prenom = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 30)]
     private ?string $grade = null;
+
+    #[ORM\Column(length: 150)]
+    private ?string $email = null;
+
+    #[ORM\Column(length: 150)]
+    private ?string $adresse = null;
 
     #[ORM\Column(length: 10)]
     private ?string $telephone = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $adresse = null;
+    #[ORM\ManyToMany(targetEntity: Formation::class, mappedBy: 'pompiers')]
+    private Collection $formations;
 
-    #[ORM\Column(length: 255)]
-    private ?string $email = null;
+    #[ORM\ManyToOne(inversedBy: 'pompiers')]
+    private ?Caserne $idCaserne = null;
 
-    #[ORM\Column(length: 50)]
-    private ?string $mdp = null;
-
-    #[ORM\OneToMany(mappedBy: 'idPompier', targetEntity: DetailIntervention::class)]
-    private Collection $detailInterventions;
+    #[ORM\ManyToMany(targetEntity: Intervention::class, mappedBy: 'pompiers')]
+    private Collection $interventions;
 
     public function __construct()
     {
-        $this->detailInterventions = new ArrayCollection();
+        $this->formations = new ArrayCollection();
+        $this->interventions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -85,14 +89,14 @@ class Pompier
         return $this;
     }
 
-    public function getTelephone(): ?string
+    public function getEmail(): ?string
     {
-        return $this->telephone;
+        return $this->email;
     }
 
-    public function setTelephone(string $telephone): static
+    public function setEmail(string $email): static
     {
-        $this->telephone = $telephone;
+        $this->email = $email;
 
         return $this;
     }
@@ -109,55 +113,79 @@ class Pompier
         return $this;
     }
 
-    public function getEmail(): ?string
+    public function getTelephone(): ?string
     {
-        return $this->email;
+        return $this->telephone;
     }
 
-    public function setEmail(string $email): static
+    public function setTelephone(string $telephone): static
     {
-        $this->email = $email;
-
-        return $this;
-    }
-
-    public function getMdp(): ?string
-    {
-        return $this->mdp;
-    }
-
-    public function setMdp(string $mdp): static
-    {
-        $this->mdp = $mdp;
+        $this->telephone = $telephone;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, DetailIntervention>
+     * @return Collection<int, Formation>
      */
-    public function getDetailInterventions(): Collection
+    public function getFormations(): Collection
     {
-        return $this->detailInterventions;
+        return $this->formations;
     }
 
-    public function addDetailIntervention(DetailIntervention $detailIntervention): static
+    public function addFormation(Formation $formation): static
     {
-        if (!$this->detailInterventions->contains($detailIntervention)) {
-            $this->detailInterventions->add($detailIntervention);
-            $detailIntervention->setIdPompier($this);
+        if (!$this->formations->contains($formation)) {
+            $this->formations->add($formation);
+            $formation->addPompier($this);
         }
 
         return $this;
     }
 
-    public function removeDetailIntervention(DetailIntervention $detailIntervention): static
+    public function removeFormation(Formation $formation): static
     {
-        if ($this->detailInterventions->removeElement($detailIntervention)) {
-            // set the owning side to null (unless already changed)
-            if ($detailIntervention->getIdPompier() === $this) {
-                $detailIntervention->setIdPompier(null);
-            }
+        if ($this->formations->removeElement($formation)) {
+            $formation->removePompier($this);
+        }
+
+        return $this;
+    }
+
+    public function getIdCaserne(): ?Caserne
+    {
+        return $this->idCaserne;
+    }
+
+    public function setIdCaserne(?Caserne $idCaserne): static
+    {
+        $this->idCaserne = $idCaserne;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Intervention>
+     */
+    public function getInterventions(): Collection
+    {
+        return $this->interventions;
+    }
+
+    public function addIntervention(Intervention $intervention): static
+    {
+        if (!$this->interventions->contains($intervention)) {
+            $this->interventions->add($intervention);
+            $intervention->addPompier($this);
+        }
+
+        return $this;
+    }
+
+    public function removeIntervention(Intervention $intervention): static
+    {
+        if ($this->interventions->removeElement($intervention)) {
+            $intervention->removePompier($this);
         }
 
         return $this;

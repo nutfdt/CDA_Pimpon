@@ -15,33 +15,46 @@ class Caserne
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 70)]
+    private ?string $nom = null;
+
+    #[ORM\Column(length: 150)]
     private ?string $adresse = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $ville = null;
-
-    #[ORM\Column(length: 255)]
-    private ?string $codePostal = null;
 
     #[ORM\ManyToOne(inversedBy: 'casernes')]
     private ?Companie $idCompanie = null;
 
-    #[ORM\OneToMany(mappedBy: 'idCaserne', targetEntity: Stock::class)]
-    private Collection $stocks;
+    #[ORM\OneToMany(mappedBy: 'idCaserne', targetEntity: Pompier::class)]
+    private Collection $pompiers;
 
     #[ORM\OneToMany(mappedBy: 'idCaserne', targetEntity: Vehicule::class)]
     private Collection $vehicules;
 
+    #[ORM\ManyToMany(targetEntity: Equipement::class, inversedBy: 'casernes')]
+    private Collection $equipements;
+
     public function __construct()
     {
-        $this->stocks = new ArrayCollection();
+        $this->pompiers = new ArrayCollection();
         $this->vehicules = new ArrayCollection();
+        $this->equipements = new ArrayCollection();
     }
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): static
+    {
+        $this->nom = $nom;
+
+        return $this;
     }
 
     public function getAdresse(): ?string
@@ -52,30 +65,6 @@ class Caserne
     public function setAdresse(string $adresse): static
     {
         $this->adresse = $adresse;
-
-        return $this;
-    }
-
-    public function getVille(): ?string
-    {
-        return $this->ville;
-    }
-
-    public function setVille(string $ville): static
-    {
-        $this->ville = $ville;
-
-        return $this;
-    }
-
-    public function getCodePostal(): ?string
-    {
-        return $this->codePostal;
-    }
-
-    public function setCodePostal(string $codePostal): static
-    {
-        $this->codePostal = $codePostal;
 
         return $this;
     }
@@ -93,29 +82,29 @@ class Caserne
     }
 
     /**
-     * @return Collection<int, Stock>
+     * @return Collection<int, Pompier>
      */
-    public function getStocks(): Collection
+    public function getPompiers(): Collection
     {
-        return $this->stocks;
+        return $this->pompiers;
     }
 
-    public function addStock(Stock $stock): static
+    public function addPompier(Pompier $pompier): static
     {
-        if (!$this->stocks->contains($stock)) {
-            $this->stocks->add($stock);
-            $stock->setIdCaserne($this);
+        if (!$this->pompiers->contains($pompier)) {
+            $this->pompiers->add($pompier);
+            $pompier->setIdCaserne($this);
         }
 
         return $this;
     }
 
-    public function removeStock(Stock $stock): static
+    public function removePompier(Pompier $pompier): static
     {
-        if ($this->stocks->removeElement($stock)) {
+        if ($this->pompiers->removeElement($pompier)) {
             // set the owning side to null (unless already changed)
-            if ($stock->getIdCaserne() === $this) {
-                $stock->setIdCaserne(null);
+            if ($pompier->getIdCaserne() === $this) {
+                $pompier->setIdCaserne(null);
             }
         }
 
@@ -148,6 +137,30 @@ class Caserne
                 $vehicule->setIdCaserne(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Equipement>
+     */
+    public function getEquipements(): Collection
+    {
+        return $this->equipements;
+    }
+
+    public function addEquipement(Equipement $equipement): static
+    {
+        if (!$this->equipements->contains($equipement)) {
+            $this->equipements->add($equipement);
+        }
+
+        return $this;
+    }
+
+    public function removeEquipement(Equipement $equipement): static
+    {
+        $this->equipements->removeElement($equipement);
 
         return $this;
     }

@@ -15,24 +15,27 @@ class Equipement
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 70)]
     private ?string $nom = null;
 
     #[ORM\Column(length: 20)]
     private ?string $reference = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 150)]
     private ?string $libelle = null;
 
-    #[ORM\Column(length: 20)]
-    private ?string $contact = null;
+    #[ORM\Column(length: 70)]
+    private ?string $nomContact = null;
 
-    #[ORM\OneToMany(mappedBy: 'idEquipement', targetEntity: Stock::class)]
-    private Collection $stocks;
+    #[ORM\Column(length: 10)]
+    private ?string $telContact = null;
+
+    #[ORM\ManyToMany(targetEntity: Caserne::class, mappedBy: 'equipements')]
+    private Collection $casernes;
 
     public function __construct()
     {
-        $this->stocks = new ArrayCollection();
+        $this->casernes = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -76,43 +79,52 @@ class Equipement
         return $this;
     }
 
-    public function getContact(): ?string
+    public function getNomContact(): ?string
     {
-        return $this->contact;
+        return $this->nomContact;
     }
 
-    public function setContact(string $contact): static
+    public function setNomContact(string $nomContact): static
     {
-        $this->contact = $contact;
+        $this->nomContact = $nomContact;
+
+        return $this;
+    }
+
+    public function getTelContact(): ?string
+    {
+        return $this->telContact;
+    }
+
+    public function setTelContact(string $telContact): static
+    {
+        $this->telContact = $telContact;
 
         return $this;
     }
 
     /**
-     * @return Collection<int, Stock>
+     * @return Collection<int, Caserne>
      */
-    public function getStocks(): Collection
+    public function getCasernes(): Collection
     {
-        return $this->stocks;
+        return $this->casernes;
     }
 
-    public function addStock(Stock $stock): static
+    public function addCaserne(Caserne $caserne): static
     {
-        if (!$this->stocks->contains($stock)) {
-            $this->stocks->add($stock);
-            $stock->setIdEquipement($this);
+        if (!$this->casernes->contains($caserne)) {
+            $this->casernes->add($caserne);
+            $caserne->addEquipement($this);
         }
 
         return $this;
     }
 
-    public function removeStock(Stock $stock): static
+    public function removeCaserne(Caserne $caserne): static
     {
-        if ($this->stocks->removeElement($stock)) {
-            // set the owning side to null (unless already changed)
-            if ($stock->getIdEquipement() === $this) {
-                $stock->setIdEquipement(null);
-            }
+        if ($this->casernes->removeElement($caserne)) {
+            $caserne->removeEquipement($this);
         }
 
         return $this;

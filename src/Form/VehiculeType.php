@@ -15,16 +15,17 @@ class VehiculeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('nom')
             ->add('matricule')
             ->add('marque')
             ->add('place')
-            ->add('idCaserne', EntityType::class, [
-                'class'=>Caserne::class,
-                'choice_label'=>'adresse',
-            ])
-            ->add('idType', EntityType::class, [
+            ->add('type', EntityType::class, [
                 'class'=>Type::class,
                 'choice_label'=>'libelle',
+            ])
+            ->add('idCaserne', EntityType::class, [
+                'class'=>Caserne::class,
+                'choice_label'=>'nom',
             ])
         ;
     }
