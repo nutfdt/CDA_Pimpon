@@ -52,59 +52,59 @@
     </nav>
 
     <div class="rejoigneznous container">
-        <p>POMPIER</p>
+        <p>FORMATION</p>
     </div>
 
     <div class="centre">
-        <h2>Modification du pompier</h2>
+        <h2>Modification de la formation</h2>
 
-        {{ form_start(editFormP, { 'attr': { 'class': 'form-horizontal' } }) }}
+        {{ form_start(editFormF, { 'attr': { 'class': 'form-horizontal' } }) }}
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="mb-3 custom-label">
-                        {{ form_label(editFormP.nom, 'Nom : ', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(editFormP.nom, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                        {{ form_label(editFormF.libelle, 'Libelle : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(editFormF.libelle, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="mb-3 custom-label">
-                        {{ form_label(editFormP.prenom, 'Prénom : ', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(editFormP.prenom, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                        {{ form_label(editFormF.cout, 'Cout : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(editFormF.cout, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="mb-3 custom-label">
-                        {{ form_label(editFormP.grade, 'Grade : ', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(editFormP.grade, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                        {{ form_label(editFormF.adresse, 'Adresse : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(editFormF.adresse, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="mb-3 custom-label">
-                        {{ form_label(editFormP.telephone, 'Téléphone : ', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(editFormP.telephone, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                        {{ form_label(editFormF.date, 'Date : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(editFormF.date, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="mb-3 custom-label">
-                        {{ form_label(editFormP.adresse, 'Adresse : ', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(editFormP.adresse, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                        {{ form_label(editFormF.heure, 'Heure : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(editFormF.heure, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
                     </div>
                 </div>
             </div>
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="mb-3 custom-label">
-                        {{ form_label(editFormP.email, 'Email : ', {'label_attr': {'class': 'form-label'}}) }}
-                        {{ form_widget(editFormP.email, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
+                        {{ form_label(editFormF.duree, 'Durée : ', {'label_attr': {'class': 'form-label'}}) }}
+                        {{ form_widget(editFormF.duree, {'attr': {'class': 'form-control', 'required': 'required'}}) }}
                     </div>
                 </div>
             </div>
@@ -115,7 +115,7 @@
                 </div>
             </div>
         </div>
-        {{ form_end(editFormP) }}
+        {{ form_end(editFormF) }}
     </div>
 
     <div>
